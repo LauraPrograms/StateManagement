@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "ShoppingCart";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+
+        <h1>Shopping Cart</h1>
+
+        @if (ViewBag.ShoppingCart != null )
+        {
+            <table class="table-bordered">
+                <tr>
+                    <th>Item</th>
+                    <th>Price  </th>
+                    <th>  Amount</th>
+                    <th>Subtotal</th>
+                    <th> Remove Amount</th>
+
+                </tr>
+                @foreach (var item in ViewBag.ShoppingCart)
+                {
+                    <tr>
+                        <td>@item.ItemName</td>
+                        <td>@item.Price</td>
+                        <td>@item.Amount</td>
+                        <td>@item.Subtotal</td>
+
+
+
+                        <td> <input type="number" id=@item.ItemID min="0" max=@item.Amount value="1" name="Amount" /></td>
+
+
+                        <td>
+                            <a href="" onclick='this.href="/Home/RemoveItem?itemName=@item.ItemName&Amount="+document.getElementById("@item.ItemID").value'>Remove from Cart</a>
+                        </td>
+
+
+                    </tr>
+
+                }
+
+            </table>
+            <h4> Total = @ViewBag.Total</h4>
+        }
+
+
+
+        <h4>@ViewBag.Message</h4>
+
+
+
+
+    </div>
+    <p>
+        @Html.ActionLink("Log out", "LogOut", "Home")  |
+
+
+        @Html.ActionLink("Products", "ListItem", "Home")
+    </p>
+
+</body>
+</html>

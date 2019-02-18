@@ -1,0 +1,14 @@
+﻿@*//User Login - if no user is logged in, input an email and password.
+    //If those credentials exist in the db, retrieve the match user and store that object in a session.
+    If not, redisplay the login page and display a message saying incorrect login.*@
+
+
+<h4> You must login before you can purchase any items.</h4>
+<form action="~/Home/LoginValidation" method="post">
+ 
+    <p>First Name <input type="text" name="FirstName" required /></p>
+    <p>Password <input type="password" name="Password" required /></p>
+    <input type="submit" name="Submit" />
+</form>
+
+

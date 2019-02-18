@@ -1,0 +1,8 @@
+﻿@if (ViewBag.CurrentUser != null)
+{
+<h3>@ViewBag.CurrentUser.FirstName has logged out.</h3>
+}
+
+
+<br />
+@Html.ActionLink("Login", "Login", "Home")

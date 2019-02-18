@@ -1,0 +1,11 @@
+﻿<h2>Welcome to the GC Coffee Shop! </h2>
+@if (ViewBag.CurrentUser == null)
+{
+    <p>Let's get you registered</p>
+    <a href="/Home/UserRegistration"> Register!</a>
+}
+else
+{
+    <p>Hello, @ViewBag.CurrentUser.FirstName</p>
+    @Html.ActionLink("Logout", "LogOut", "Home")
+}

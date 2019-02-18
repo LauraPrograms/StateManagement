@@ -1,0 +1,19 @@
+﻿
+<h3>Welcome @ViewBag.CurrentUser.FirstName</h3>
+<h4>Your account email is @ViewBag.CurrentUser.Email</h4>
+<h4>Your age is @ViewBag.CurrentUser.Age</h4>
+<h4>Your password is @ViewBag.CurrentUser.Password</h4>
+@if (ViewBag.CurrentUser != null)
+{
+
+
+    <p> @Html.ActionLink("Log out", "LogOut", "Home")  |
+    
+
+    @Html.ActionLink("Products", "ListItem", "Home") </p>
+
+}
+
+
+
+

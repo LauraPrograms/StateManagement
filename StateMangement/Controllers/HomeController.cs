@@ -64,7 +64,7 @@ namespace StateMangement.Controllers
             {
                 if (person.FirstName == loginUser.FirstName && person.Password == loginUser.Password)
                 {
-                    Session["CurrentUser"] = person;//person instead of loginUser because person has all the information saved
+                    Session["CurrentUser"] = person;
                     return RedirectToAction("Details");
                 }
             }
@@ -74,7 +74,7 @@ namespace StateMangement.Controllers
 
 
         }
-        public ActionResult Details(User user)//EVAN LOOK HERE FIRST. After user fills out registration, they are directed to my details page.
+        public ActionResult Details(User user)
         {
             if (Session["CurrentUser"] != null) //If that key (session) exists at all
             {
@@ -102,7 +102,7 @@ namespace StateMangement.Controllers
                     {
                         userList = new List<User>();
                         userList.Add(user);
-                        Session["List"] = userList; //this makes the new session
+                        Session["List"] = userList;
                     }
                     //userList.Add(user);
                     //Session["List"] = userList;
@@ -132,10 +132,10 @@ namespace StateMangement.Controllers
             {
                 ViewBag.ItemsList = ItemList;
                 ViewBag.CurrentUser = (User)Session["CurrentUser"];
-                if (Session["TotalItems"]!=null)
+                if (Session["TotalItems"] != null)
                 {
-                    TotalItems = (int)Session["TotalItems"];                    
-                }               
+                    TotalItems = (int)Session["TotalItems"];
+                }
                 ViewBag.TotalItems = TotalItems;
                 return View();
             }
@@ -153,9 +153,9 @@ namespace StateMangement.Controllers
             {
                 if (item.ItemName == itemName)
                 {
-                    foreach(Item cartItem in ShoppingCart)
+                    foreach (Item cartItem in ShoppingCart)
                     {
-                        if(item.ItemName == cartItem.ItemName)
+                        if (item.ItemName == cartItem.ItemName)
                         {
                             cartItem.Amount = cartItem.Amount + Amount;
                             duplicateItem = true;
@@ -170,11 +170,11 @@ namespace StateMangement.Controllers
                         TotalItems = TotalItems + item.Amount;
                     }
 
-                    
+
                 }
 
             }
-           
+
             Session["TotalItems"] = TotalItems;
             ViewBag.TotalItems = TotalItems;
             Session["ShoppingCart"] = ShoppingCart;
@@ -182,18 +182,18 @@ namespace StateMangement.Controllers
         }
         public ActionResult ViewCart()
         {
-            
+
             if (Session["ShoppingCart"] == null)
             {
                 ViewBag.Message = "This cart is empty";
             }
             else
             {
-                
+
                 ShoppingCart = (List<Item>)Session["ShoppingCart"];
                 foreach (Item item in ShoppingCart)
                 {
-                    item.Subtotal = item.Amount *item.Price;
+                    item.Subtotal = item.Amount * item.Price;
                     ViewBag.Subtotal = item.Subtotal;
                 }
                 foreach (Item item in ShoppingCart)
@@ -210,9 +210,11 @@ namespace StateMangement.Controllers
 
         public ActionResult RemoveItem(string itemName, int Amount)
         {
+
             if (Session["ShoppingCart"] != null)
             {
                 ShoppingCart = (List<Item>)Session["ShoppingCart"];
+                Total = (int)Session["CustomerTotal"];
             }
             foreach (Item cartItem in ShoppingCart)
             {
@@ -236,6 +238,7 @@ namespace StateMangement.Controllers
             {
                 Session["ShoppingCart"] = ShoppingCart;
             }
+            Session["CustomerTotal"] = Total;
             return RedirectToAction("ViewCart");
         }
     }
